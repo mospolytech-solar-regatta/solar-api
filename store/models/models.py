@@ -1,7 +1,7 @@
 from sqlalchemy import Column, Integer, String, DateTime, JSON, ForeignKey
 from sqlalchemy.orm import relationship
 
-from store.database import Base
+from store.settings.database import Base
 
 
 class User(Base):
