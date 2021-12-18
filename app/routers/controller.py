@@ -4,7 +4,7 @@ from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
 
 from app.dependencies import get_db
-from store import controller
+from store import controller, telemetry
 from store.schemas import schemas
 from store.schemas.schemas import ControllerCreate
 
@@ -22,6 +22,11 @@ def get_controllers(db: Session = Depends(get_db)):
 @router.get('/{id}')
 def get_controller(id: int, db: Session = Depends(get_db)):
     return controller.get_controller(db, id)
+
+
+@router.get('/{id}/telemetry')
+def get_controller_telemetry(id: int, db: Session = Depends(get_db)):
+    return telemetry.get_last_telemetry(db, id)
 
 
 @router.post('/')
