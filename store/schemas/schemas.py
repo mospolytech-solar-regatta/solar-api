@@ -1,12 +1,25 @@
-import datetime
-from typing import List, Dict, Union, Optional
+from datetime import datetime
+from typing import List, Optional
 
 from pydantic import BaseModel
 
 
 class TelemetryBase(BaseModel):
-    controller_id: int
-    data: Dict[str, Union[float, int, str]]
+    created_at: datetime
+    controller_watts: int
+    time_to_go: int
+    controller_volts: float
+    MPPT_volts: float
+    MPPT_watts: float
+    motor_temp: float
+    motor_revols: float
+    speed: Optional[float]
+    position_lat: float
+    position_lng: float
+    distance_travelled: Optional[float]
+    laps: Optional[int]
+    lap_point_lat: Optional[float]
+    lap_point_lng: Optional[float]
 
 
 class TelemetryCreate(TelemetryBase):
@@ -15,7 +28,6 @@ class TelemetryCreate(TelemetryBase):
 
 class Telemetry(TelemetryBase):
     id: int
-    created_at: datetime.datetime
 
     class Config:
         orm_mode = True
